@@ -1,9 +1,11 @@
 const multer = require('multer');
 const sharp = require('sharp');
-const Product = require('./../models/ProductModel');
-const catchAsync = require('./../utils/catchAsync');
+
+const Product = require('../models/productModel');
+
+const catchAsync = require('../utils/catchAsync');
 const factory = require('./handlerFactory');
-const AppError = require('./../utils/appError');
+const AppError = require('../utils/appError');
 
 const multerStorage = multer.memoryStorage();
 
@@ -11,7 +13,10 @@ const multerFilter = (req, file, cb) => {
   if (file.mimetype.startsWith('image')) {
     cb(null, true);
   } else {
-    cb(new AppError('Not an image! Please upload only images.', 400), false);
+    cb(
+      new AppError('Görsel değil! Lütfen sadece görsel yükleyin.', 400),
+      false
+    );
   }
 };
 

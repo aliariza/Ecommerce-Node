@@ -1,6 +1,6 @@
 const express = require('express');
 const productController = require('../controllers/productController');
-// const authController = require('../controllers/authController');
+const authController = require('../controllers/authController');
 // const reviewRouter = require('../routes/reviewRoutes');
 
 const router = express.Router();
@@ -35,25 +35,28 @@ const router = express.Router();
 //   .route('/distances/:latlng/unit/:unit')
 //   .get(productController.getDistances);
 
-router.route('/').get(productController.getAllProducts).post(
-  // authController.protect,
-  // authController.restrictTo('admin'),
-  productController.createProduct
-);
+router
+  .route('/')
+  .get(productController.getAllProducts)
+  .post(
+    authController.protect,
+    authController.restrictTo('admin'),
+    productController.createProduct
+  );
 
 router
   .route('/:id')
   .get(productController.getProduct)
   .patch(
-    // authController.protect,
-    // authController.restrictTo('admin'),
+    authController.protect,
+    authController.restrictTo('admin'),
     // productController.uploadProductImages,
     // productController.resizeProductImages,
     productController.updateProduct
   )
   .delete(
-    // authController.protect,
-    // authController.restrictTo('admin'),
+    authController.protect,
+    authController.restrictTo('admin'),
     productController.deleteProduct
   );
 

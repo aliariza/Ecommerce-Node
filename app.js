@@ -13,7 +13,7 @@ const cors = require('cors');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
 const productRouter = require('./routes/productRoutes');
-// const userRouter = require('./routes/userRoutes');
+const userRouter = require('./routes/userRoutes');
 // const reviewRouter = require('./routes/reviewRoutes');
 // const bookingRouter = require('./routes/bookingRoutes');
 // const bookingController = require('./controllers/bookingController');
@@ -95,12 +95,12 @@ app.use((req, res, next) => {
 // 3) ROUTES
 // app.use('/', viewRouter);
 app.use('/api/v1/products', productRouter);
-// app.use('/api/v1/users', userRouter);
+app.use('/api/v1/users', userRouter);
 // app.use('/api/v1/reviews', reviewRouter);
 // app.use('/api/v1/bookings', bookingRouter);
 
 app.all('*', (req, res, next) => {
-  next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
+  next(new AppError(`Bu sunucuda ${req.originalUrl} bulunamadı!`, 404));
 });
 
 app.use(globalErrorHandler);
