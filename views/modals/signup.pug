@@ -1,0 +1,27 @@
+#signupModal.modal.fade(tabindex="-1", aria-labelledby="signupModalLabel", aria-hidden="true")
+  .modal-dialog.modal-dialog-centered.modal-dialog-scrollable
+    .modal-content.rounded-0.border-0
+      .modal-header
+        h5#signupModalLabel.modal-title Kayit Olun
+        button.btn-close(type="button", data-bs-dismiss="modal", aria-label="Close")
+      .modal-body
+        form.form--signup
+          .mb-3
+            label.col-form-label(for="name") Adiniz:
+            input#name.form-control(type="text")
+          .mb-3
+            label.col-form-label(for="message-text") E-posta:
+            input#email.form-control(type="email")
+          .mb-3
+            label.col-form-label(for="message-text") Sifreniz:
+            input#password.form-control(type="password")
+          .mb-3
+            label.col-form-label(for="message-text") Sifreniz tekrar:
+            input#passwordConfirm.form-control(type="password")
+          mb-3
+            button.btn.btn-primary Kayit
+
+      .modal-footer
+        button.btn.btn-secondary(type="button", data-bs-dismiss="modal")
+          | Close
+        button.btn.btn-primary(type="button") Save changes

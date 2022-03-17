@@ -1,0 +1,21 @@
+#loginModal.modal.fade(tabindex="-1", aria-labelledby="loginModalLabel", aria-hidden="true")
+  .modal-dialog.modal-dialog-centered.modal-dialog-scrollable
+    .modal-content.rounded-0.border-0
+      .modal-header
+        h5#loginModalLabel.modal-title Giris
+        button.btn-close(type="button", data-bs-dismiss="modal", aria-label="Close")
+      .modal-body
+        form.form--login
+          .mb-3
+            label.col-form-label(for="email") E-posta:
+            input#email.form-control(type="email" required placeholder="you@example.com")
+          .mb-3
+            label.col-form-label(for="message-text") Sifre:
+            input#password.form-control(type="password" required placeholder="••••••••" minlength= '8')
+          .mb-3
+            button.btn.btn-primary GIRIS
+      .modal-footer
+        button.btn.btn-secondary(type="button", data-bs-dismiss="modal")
+          | Close
+        button.btn.btn-primary(type="button", data-bs-toggle="modal", data-bs-target="#signupModal")
+          | Kayit olun

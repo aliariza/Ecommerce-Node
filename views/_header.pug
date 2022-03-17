@@ -1,0 +1,43 @@
+nav.navbar.navbar-expand-lg.navbar-light.py-0.border-bottom.border-dark(style="line-height: 3rem")
+  .container
+    a.navbar-brand(href="#")
+      img(src="https://www.theferruat.com/frontend/assets/img/Theferruat_Logo_Black.svg", alt="Logo", width="200", height="auto")
+    button.navbar-toggler(type="button", data-bs-toggle="collapse", data-bs-target="#navbarNavDropdown", aria-controls="navbarNavDropdown", aria-expanded="false", aria-label="Toggle navigation")
+      span.navbar-toggler-icon
+    #navbarNavDropdown.collapse.navbar-collapse.justify-content-end
+      ul.navbar-nav.text-uppercase
+        li.nav-item.px-3.border-end.border-dark
+          a.nav-link.active(aria-current="page", href="#") hakkımızda
+        li.nav-item.dropdown.px-3.border-end.border-dark
+          a#navbarDropdownMenuLink.nav-link.dropdown-toggle(href="#", role="button", data-bs-toggle="dropdown", aria-expanded="false") ürünler
+          ul.dropdown-menu.rounded-0(aria-labelledby="navbarDropdownMenuLink")
+            li
+              a.dropdown-item(href="#") Action
+            li
+              a.dropdown-item(href="#") Another action
+            li
+              a.dropdown-item(href="#") Something else here
+        li.nav-item.dropdown.px-3.border-end.border-dark
+          a#navbarDropdownMenuLink.nav-link.dropdown-toggle(href="#", role="button", data-bs-toggle="dropdown", aria-expanded="false") iletişim
+          ul.dropdown-menu.rounded-0(aria-labelledby="navbarDropdownMenuLink")
+            li
+              a.dropdown-item(href="#") Action
+            li
+              a.dropdown-item(href="#") Another action
+            li
+              a.dropdown-item(href="#") Something else here
+          if user
+            li.nav-item.dropdown.px-3.border-end.border-dark
+              a#navbarDropdownMenuLink.nav-link.dropdown-toggle(href="#", role="button", data-bs-toggle="dropdown", aria-expanded="false") Hesabim
+              ul.dropdown-menu.rounded-0(aria-labelledby="navbarDropdownMenuLink")
+                li
+                  a.dropdown-item(href="#") Action
+                li
+                  a.dropdown-item(href="#") Another action
+                li
+                  a.dropdown-item.nav__el--logout Çıkış
+          else
+            li.nav-item.px-3.border-end.border-dark
+              a.nav-link(href="/modals/login", data-bs-toggle="modal", data-bs-target="#loginModal") giriş
+        li.nav-item.px-3.border-end.border-dark
+          a.nav-link(aria-current="page", href="#", data-bs-toggle="modal", data-bs-target="#minicartModal") sepet

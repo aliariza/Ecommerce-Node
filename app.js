@@ -17,7 +17,8 @@ const userRouter = require('./routes/userRoutes');
 // const reviewRouter = require('./routes/reviewRoutes');
 // const bookingRouter = require('./routes/bookingRoutes');
 // const bookingController = require('./controllers/bookingController');
-// const viewRouter = require('./routes/viewRoutes');
+
+const viewRouter = require('./routes/viewRoutes');
 
 // Start express app
 const app = express();
@@ -93,7 +94,7 @@ app.use((req, res, next) => {
 });
 
 // 3) ROUTES
-// app.use('/', viewRouter);
+app.use('/', viewRouter);
 app.use('/api/v1/products', productRouter);
 app.use('/api/v1/users', userRouter);
 // app.use('/api/v1/reviews', reviewRouter);
