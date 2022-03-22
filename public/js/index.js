@@ -14,6 +14,7 @@ const logOutBtn = document.querySelector('.nav__el--logout');
 const signupForm = document.querySelector('.form--signup');
 const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
 const signupModal = new bootstrap.Modal(document.getElementById('signupModal'));
+const minicartModal = document.getElementById('myModal2');
 
 // DELEGATION
 // if (mapBox) {

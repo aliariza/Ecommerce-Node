@@ -15,6 +15,10 @@ const userSchema = new mongoose.Schema({
     lowercase: true,
     validate: [validator.isEmail, 'Lütfen geçerli bir e-posta girin'],
   },
+  telephone: {
+    type: Number,
+    minlength: 11,
+  },
   photo: {
     type: String,
     default: 'default.jpg',

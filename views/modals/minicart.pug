@@ -1,0 +1,26 @@
+#minicartModal.modal.modal-right.fade(tabindex="-1", aria-labelledby="minicartModalLabel",
+aria-hidden="true")
+  .modal-dialog.modal-dialog-scrollable.modal-lg
+    .modal-content
+      .modal-header
+        h5#minicartModalModalLabel.modal-title Sepetim
+        button.btn-close(type="button", data-bs-dismiss="modal", aria-label="Close")
+      .modal-body
+        .container-fluid
+          .row
+            if user
+              .col-md-3(style="background-color:red")
+                img(src="https://www.theferruat.com/upload/products/thumbnail/1712378209310789.png", alt="", width="100%", height="auto")
+              .col-md-4.ms-auto(style="background-color:purple")
+                .d-flex.flex-column
+                  .p-2 Flex item 1
+                  .p-2 Flex item 2
+                  .p-2 Flex item 3
+              .col-md-4.ms-auto(style="background-color:brown")
+            else 
+              | Henüz sepetinizde ürün yok!.
+            
+    // modal-content
+  // modal-dialog
+// modal
+// Modal

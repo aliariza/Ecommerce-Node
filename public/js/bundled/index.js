@@ -534,6 +534,7 @@ var logOutBtn = document.querySelector('.nav__el--logout');
 var signupForm = document.querySelector('.form--signup');
 var loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
 var signupModal = new bootstrap.Modal(document.getElementById('signupModal'));
+var minicartModal = document.getElementById('myModal2');
 // DELEGATION
 // if (mapBox) {
 //   const locations = JSON.parse(mapBox.dataset.locations);
