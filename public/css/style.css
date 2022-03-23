@@ -204,22 +204,46 @@ a.has-sub[aria-expanded='true']:after {
   content: '\f106';
 }
 
-.carousel-control-prev,
-.carousel-control-next {
-  top: 100%;
-  height: 5rem !important;
-  filter: invert(100%);
+@media (max-width: 767px) {
+  .carousel-inner .carousel-item > div {
+    display: none;
+  }
+  .carousel-inner .carousel-item > div:first-child {
+    display: block;
+  }
 }
-.carousel-control-prev:hover,
-.carousel-control-prev:focus,
-.carousel-control-next:hover,
-.carousel-control-next:focus {
-  background-color: transparent;
-  border: 0;
+
+.carousel-inner .carousel-item.active,
+.carousel-inner .carousel-item-next,
+.carousel-inner .carousel-item-prev {
+  display: flex;
+}
+
+/* medium and up screens */
+@media (min-width: 768px) {
+  .carousel-inner .carousel-item-end.active,
+  .carousel-inner .carousel-item-next {
+    transform: translateX(50%);
+  }
+
+  .carousel-inner .carousel-item-start.active,
+  .carousel-inner .carousel-item-prev {
+    transform: translateX(-50%);
+  }
+}
+
+.carousel-inner .carousel-item-end,
+.carousel-inner .carousel-item-start {
+  transform: translateX(0);
+}
+.carousel-control-next,
+.carousel-control-prev {
+  top: 75%;
+  height: 3rem;
+}
+.carousel-control-next {
+  right: 25%;
 }
 .carousel-control-prev {
-  left: 35%;
-}
-.carousel-control-next {
-  right: 35%;
+  left: 25%;
 }

@@ -3,6 +3,7 @@ import { login, logout, signup } from './login';
 // import { updateSettings } from './updateSettings';
 // import { bookTour } from './stripe';
 import { showAlert } from './alerts';
+import { carousel } from './carousel';
 
 // DOM ELEMENTS
 // const mapBox = document.getElementById('map');
@@ -14,7 +15,9 @@ const logOutBtn = document.querySelector('.nav__el--logout');
 const signupForm = document.querySelector('.form--signup');
 const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
 const signupModal = new bootstrap.Modal(document.getElementById('signupModal'));
-const minicartModal = document.getElementById('myModal2');
+const items = document.querySelectorAll(
+  '.carousel .carousel-inner .carousel-item'
+);
 
 // DELEGATION
 // if (mapBox) {
@@ -81,3 +84,5 @@ if (logOutBtn) logOutBtn.addEventListener('click', logout);
 
 const alertMessage = document.querySelector('body').dataset.alert;
 if (alertMessage) showAlert('success', alertMessage, 20);
+
+if (items) carousel(items);

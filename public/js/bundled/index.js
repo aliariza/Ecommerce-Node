@@ -524,6 +524,7 @@ var _login = require("./login");
 // import { updateSettings } from './updateSettings';
 // import { bookTour } from './stripe';
 var _alerts = require("./alerts");
+var _carousel = require("./carousel");
 // DOM ELEMENTS
 // const mapBox = document.getElementById('map');
 var loginForm = document.querySelector('.form--login');
@@ -534,7 +535,7 @@ var logOutBtn = document.querySelector('.nav__el--logout');
 var signupForm = document.querySelector('.form--signup');
 var loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
 var signupModal = new bootstrap.Modal(document.getElementById('signupModal'));
-var minicartModal = document.getElementById('myModal2');
+var items = document.querySelectorAll('.carousel .carousel-inner .carousel-item');
 // DELEGATION
 // if (mapBox) {
 //   const locations = JSON.parse(mapBox.dataset.locations);
@@ -590,8 +591,9 @@ if (logOutBtn) logOutBtn.addEventListener('click', _login.logout);
 //   });
 var alertMessage = document.querySelector('body').dataset.alert;
 if (alertMessage) _alerts.showAlert('success', alertMessage, 20);
+if (items) _carousel.carousel(items);
 
-},{"@babel/polyfill":"eoBSx","./login":"dhSY6","./alerts":"2me8o"}],"eoBSx":[function(require,module,exports) {
+},{"@babel/polyfill":"eoBSx","./login":"dhSY6","./alerts":"2me8o","./carousel":"iILtV"}],"eoBSx":[function(require,module,exports) {
 "use strict";
 require("./noConflict");
 var _global = _interopRequireDefault(require("core-js/library/fn/global"));
@@ -11029,6 +11031,27 @@ var showAlert = function(type, msg) {
     var markup = "<div class=\"alert alert--".concat(type, "\">").concat(msg, "</div>");
     document.querySelector('body').insertAdjacentHTML('afterbegin', markup);
     window.setTimeout(hideAlert, time * 1000);
+};
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"6hZMW"}],"iILtV":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "carousel", function() {
+    return carousel;
+});
+var carousel = function(items) {
+    return items.forEach(function(el) {
+        var minPerSlide = 2;
+        var next = el.nextElementSibling;
+        for(var i = 1; i < minPerSlide; i++){
+            if (!next) next = items[0];
+            if (el.classList.contains('active')) items[i].classList.remove('active');
+            else items[i + 1].classList.add('active');
+            var cloneChild = next.cloneNode(true);
+            el.appendChild(cloneChild.children[0]);
+            next = next.nextElementSibling;
+        }
+    });
 };
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"6hZMW"}]},["2j7S9","dN1My"], "dN1My", "parcelRequire398c")

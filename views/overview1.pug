@@ -1,0 +1,130 @@
+extends base
+
+block content
+  .container.position-relative.mt-5(style="width:1200px")
+    .bg-dark.text-white.text-center.pt-4.position-absolute.start-50.translate-middle-x(style="height:20rem; width:65%;")
+      h1 Theferruat
+    .row.justify-content-center.position-absolute.start-0.mt-5(style="top:6vh")
+      .col-lg-3
+        .card.text-center.rounded-0.mb-5.mb-md-0
+          img.card-img-top.py-4(src="https://www.theibrik.com/images/coffee_beans.svg", alt="...", height="150")
+          .card-body(style="min-height: 15rem")
+            h5.card-title NİTELİKLİ KAHVE İYİ EKİPMAN
+            p.card-text.pt-2
+              | Doğru kahvede doğru demlemenin önemini biz de sizin kadar iyi biliyoruz. Ekipmanlarımız sayesinde doğru demleyi mümkün kılıyoruz.
+            // <span></span>
+      .col-lg-3
+        .card.text-center.rounded-0
+          img.card-img-top.py-4(src="https://www.theibrik.com/images/motorbike.svg", alt="...", height="150")
+          .card-body(style="min-height: 15rem")
+            h5.card-title DOĞRU EKİPMAN KAPINIZA TESLİM
+            p.card-text.pt-2
+              | Ekipmanlarimizi sizlerle kargo masrafı olmadan kapınızda buluşturuyoruz.
+      .col-lg-3
+        .card.text-center.rounded-0
+          img.card-img-top.py-4(src="https://www.theibrik.com/images/world.svg", alt="...", height="150")
+          .card-body(style="min-height: 15rem")
+            h5.card-title DÜNYA MARKALARI ile AYNI KALİTE
+            p.card-text.pt-2
+              | Ekipmanlarimiz kalitede odun vermezken fiyatta avantaj sağlamaktadırlar.
+    .bg-dark.text-white.text-center.pt-4.position-absolute.start-50.translate-middle-x(style="height:20rem; width:65%; top:65vh;")
+      h1 Ürünlerimiz
+    #carouselExampleControls.carousel.slide(data-bs-ride="carousel", style="top:76vh")
+      .carousel-inner
+        .carousel-item.active
+          .row
+            .col-md-6
+              .card.p-4.rounded-0(style="height:35rem")
+                .card-header hello
+                .card-body
+                  .row
+                    .col-md-5
+                      h5.card-title Kirmizi
+                      p.card-text 
+                      | Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus porro veniam autem debitis, quo, libero reiciendis tempora enim, nam quae dolore harum magni vel quos? Deleniti voluptas quo sit dicta natus temporibus, dolore iusto. Voluptates quos dicta aperiam minima omnis.
+                    .col-md-7.text-end
+                      img(src="https://www.theferruat.com/upload/products/thumbnail/1712377899785976.png", alt="...",style="height:20rem")
+                  .card-footer.mt-5(style="background-color:transparent; border:none; height=5rem")
+                    .d-flex.justify-content-around 
+                      button.rounded-circle 
+                        span(style="line-height:2.2rem") Bas
+                      button.rounded-circle Bas
+                      button.rounded-circle Bas
+            .col.md-6
+              .card.p-4.rounded-0(style="height:35rem")
+                .card-header hello
+                .card-body
+                  .row
+                    .col-md-5
+                      h5.card-title Kirmizi
+                      p.card-text 
+                      | Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus porro veniam autem debitis, quo, libero reiciendis tempora enim, nam quae dolore harum magni vel quos? Deleniti voluptas quo sit dicta natus temporibus, dolore iusto. Voluptates quos dicta aperiam minima omnis.
+                    .col-md-7.text-end
+                      img(src="https://www.theferruat.com/upload/products/thumbnail/1712378462973738.png", alt="...",style="height:20rem" )
+                  .card-footer.mt-5(style="background-color:transparent; border:none; height=5rem")
+                    .d-flex.justify-content-around 
+                      button.rounded-circle 
+                        span(style="line-height:2.2rem") Bas
+                      button.rounded-circle Bas
+                      button.rounded-circle Bas
+
+        .carousel-item
+           .row
+            .col-md-6
+              .card.p-4.rounded-0(style="height:35rem")
+                .card-header hello
+                .card-body
+                  .row
+                    .col-md-5
+                      h5.card-title Kirmizi
+                      p.card-text 
+                      | Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus porro veniam autem debitis, quo, libero reiciendis tempora enim, nam quae dolore harum magni vel quos? Deleniti voluptas quo sit dicta natus temporibus, dolore iusto. Voluptates quos dicta aperiam minima omnis.
+                    .col-md-7.text-end
+                      img(src="https://www.theferruat.com/upload/products/thumbnail/1712377869771585.png", alt="...",style="height:20rem")
+                  .card-footer.mt-5(style="background-color:transparent; border:none; height=5rem")
+                    .d-flex.justify-content-around 
+                      button.rounded-circle 
+                        span(style="line-height:2.2rem") Bas
+                      button.rounded-circle Bas
+                      button.rounded-circle Bas
+      .row
+        .col-md-6.h-25          
+          button.carousel-control-prev(type="button", data-bs-target="#carouselExampleControls", data-bs-slide="prev")
+            span.carousel-control-prev-icon(aria-hidden="false")
+            span.visually-hidden Previous
+        .col-md-6.h-25
+          button.carousel-control-next(type="button", data-bs-target="#carouselExampleControls", data-bs-slide="next")
+            span.carousel-control-next-icon(aria-hidden="true")
+            span.visually-hidden Next
+    .bg-dark.text-white.text-center.pt-4.position-absolute.start-50.translate-middle-x(style="height:20rem; width:65%; top:155vh;")
+      h1 Ürünlerimiz
+    .row.justify-content-center.position-absolute.start-0(style="top:166vh")
+      .col-sm-3
+        .card.text-center.rounded-0.mb-5.mb-md-0
+          img.card-img-top.py-4(src="https://www.theibrik.com/images/coffee_beans.svg", alt="...", height="150")
+          .card-body(style="min-height: 15rem")
+            h5.card-title NİTELİKLİ KAHVE İYİ EKİPMAN
+            p.card-text.pt-2
+              | Doğru kahvede doğru demlemenin önemini biz de sizin kadar iyi biliyoruz. Ekipmanlarımız sayesinde doğru demleyi mümkün kılıyoruz.
+      .col-sm-3
+        .card.text-center.rounded-0
+          img.card-img-top.py-4(src="https://www.theibrik.com/images/motorbike.svg", alt="...", height="150")
+          .card-body(style="min-height: 15rem")
+            h5.card-title DOĞRU EKİPMAN KAPINIZA TESLİM
+            p.card-text.pt-2
+              | Ekipmanlarimizi sizlerle kargo masrafı olmadan kapınızda buluşturuyoruz.
+      .col-sm-3
+        .card.text-center.rounded-0.mb-5.mb-md-0
+          img.card-img-top.py-4(src="https://www.theibrik.com/images/coffee_beans.svg", alt="...", height="150")
+          .card-body(style="min-height: 15rem")
+            h5.card-title NİTELİKLİ KAHVE İYİ EKİPMAN
+            p.card-text.pt-2
+              | Doğru kahvede doğru demlemenin önemini biz de sizin kadar iyi biliyoruz. Ekipmanlarımız sayesinde doğru demleyi mümkün kılıyoruz.
+            // <span></span>
+      .col-sm-3
+        .card.text-center.rounded-0
+          img.card-img-top.py-4(src="https://www.theibrik.com/images/motorbike.svg", alt="...", height="150")
+          .card-body(style="min-height: 15rem")
+            h5.card-title DOĞRU EKİPMAN KAPINIZA TESLİM
+            p.card-text.pt-2
+              | Ekipmanlarimizi sizlerle kargo masrafı olmadan kapınızda buluşturuyoruz.
