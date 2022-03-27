@@ -73,42 +73,9 @@ exports.aliasTopProducts = (req, res, next) => {
 
 exports.getAllProducts = factory.getAll(Product);
 exports.getProduct = factory.getOne(Product);
-// exports.getProduct = factory.getOne(Product, { path: 'reviews' });
 exports.createProduct = factory.createOne(Product);
 exports.updateProduct = factory.updateOne(Product);
 exports.deleteProduct = factory.deleteOne(Product);
-
-exports.getProductStats = catchAsync(async (req, res, next) => {
-  const stats = await Product.aggregate([
-    {
-      $match: { ratingsAverage: { $gte: 4.5 } },
-    },
-    {
-      $group: {
-        // _id: { $toUpper: '$difficulty' },
-        numProducts: { $sum: 1 },
-        numRatings: { $sum: '$ratingsQuantity' },
-        avgRating: { $avg: '$ratingsAverage' },
-        avgPrice: { $avg: '$price' },
-        minPrice: { $min: '$price' },
-        maxPrice: { $max: '$price' },
-      },
-    },
-    {
-      $sort: { avgPrice: 1 },
-    },
-    // {
-    //   $match: { _id: { $ne: 'EASY' } }
-    // }
-  ]);
-
-  res.status(200).json({
-    status: 'success',
-    data: {
-      stats,
-    },
-  });
-});
 
 // exports.getMonthlyPlan = catchAsync(async (req, res, next) => {
 //   const year = req.params.year * 1; // 2021

@@ -1,0 +1,31 @@
+extends base
+
+block content
+
+  .container.text-center.my-3
+    .row.mx-auto.my-auto.justify-content-center.align-items-center
+      #recipeCarousel.carousel.slide(data-bs-ride="carousel")
+        .carousel-inner
+          each product in products
+            .carousel-item
+              .col-md-6
+                .card.m-4.rounded-0.p-4.bg-transparent
+                  .card-header.text-start.bg-transparent.border-0 
+                    h2=product.name
+                    .row
+                      .col-lg-5.col-md-12
+                        .card-color
+                          h3=product.color
+                        .card-description
+                          p Lorem ipsum dolor sit, amet consectetur adipisicing elit. Praesentium, nisi? Dolorum assumenda laboriosam recusandae natus dolor. Exercitationem molestiae eaque soluta! Lorem ipsum dolor sit amet 
+                      .col-md-7
+                        .card-img
+                          img.img-fluid(src="https://www.theferruat.com/upload/products/thumbnail/1712378209310789.png")
+                  .card-footer.d-flex.justify-content-around.border-0.bg-transparent
+                    a.btn.btn-primary.rounded-circle bas
+                    a.btn.btn-primary.rounded-circle bas
+                    a.btn.btn-primary.rounded-circle bas
+    a.carousel-control-prev.w-aut(href="#recipeCarousel", role="button", data-bs-slide="prev")
+      span.carousel-control-prev-icon(aria-hidden="true", style="color:black!important")
+    a.carousel-control-next.w-aut(href="#recipeCarousel", role="button", data-bs-slide="next")
+      span.carousel-control-next-icon(aria-hidden="true")

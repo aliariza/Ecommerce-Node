@@ -2,7 +2,7 @@ const Product = require('../models/productModel');
 // const User = require('../models/userModel');
 // // const Booking = require('../models/bookingModel');
 const catchAsync = require('../utils/catchAsync');
-// const AppError = require('../utils/appError');
+const AppError = require('../utils/appError');
 
 exports.alerts = (req, res, next) => {
   const { alert } = req.query;
@@ -24,24 +24,23 @@ exports.getOverview = catchAsync(async (req, res, next) => {
   });
 });
 
-// exports.getProduct = catchAsync(async (req, res, next) => {
-//   // 1) Get the data, for the requested tour (including reviews and guides)
-//   const product = await Product.findOne({ slug: req.params.slug }).populate({
-//     path: 'reviews',
-//     fields: 'review rating user',
-//   });
+exports.getProduct = catchAsync(async (req, res, next) => {
+  // 1) Get the data, for the requested tour (including reviews and guides)
+  console.log(req);
+  const product = await Product.findOne({ slug: req.params.slug });
 
-//   if (!product) {
-//     return next(new AppError('There is no product with that name.', 404));
-//   }
+  if (!product) {
+    return next(new AppError('There is no product with that name.', 404));
+  }
+  console.log(product.name, product.price, product.id);
 
-//   // 2) Build template
-//   // 3) Render template using data from 1)
-//   res.status(200).render('product', {
-//     title: `${product.name}`,
-//     product,
-//   });
-// });
+  // 2) Build template
+  // 3) Render template using data from 1)
+  res.status(200).render('modals/mainpageProduct', {
+    title: `${product.name}`,
+    product,
+  });
+});
 
 exports.getLoginForm = (req, res) => {
   res.status(200).render('modals/login', {
@@ -50,7 +49,7 @@ exports.getLoginForm = (req, res) => {
 };
 
 exports.getSignupForm = (req, res) => {
-  res.status(200).render('signup', {
+  res.status(200).render('modals/signup', {
     title: 'Kayıt',
   });
 };

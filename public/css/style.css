@@ -1,3 +1,48 @@
+h2 {
+  font-size: 2.5rem;
+  text-transform: uppercase;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 200;
+  letter-spacing: 2px;
+  color: rgb(70, 70, 70);
+}
+h3 {
+  font-size: 1.3rem;
+  font-family: 'Mulish', sans-serif;
+  font-weight: 400;
+  color: rgb(90, 90, 90);
+  letter-spacing: 1px;
+}
+p {
+  font-size: 1rem;
+  font-family: 'Mulish', sans-serif;
+  color: rgb(110, 110, 110);
+  letter-spacing: 1px;
+  font-weight: 400;
+}
+.btn {
+  box-shadow: none !important;
+}
+.btn:focus {
+  outline: none;
+  box-shadow: none;
+}
+.btn-primary {
+  background-color: #eb965e;
+  border: none;
+  border-radius: 0;
+}
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: #e97e39 !important;
+}
+.rounded-circle {
+  height: 4rem;
+  width: 4rem;
+  padding: 0;
+  line-height: 3.75rem;
+  margin: auto;
+}
 @media (max-width: 991px) {
   nav ul li.border-end {
     border: 0px solid !important;
@@ -238,7 +283,7 @@ a.has-sub[aria-expanded='true']:after {
 }
 .carousel-control-next,
 .carousel-control-prev {
-  top: 75%;
+  top: 200%;
   height: 3rem;
 }
 .carousel-control-next {
@@ -246,4 +291,11 @@ a.has-sub[aria-expanded='true']:after {
 }
 .carousel-control-prev {
   left: 25%;
+}
+span.carousel-control-next-icon {
+  background-image: url(/img/svg/right-arrow.svg);
+}
+
+span.carousel-control-prev-icon {
+  background-image: url(/img/svg/left-arrow.svg);
 }

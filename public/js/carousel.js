@@ -1,6 +1,8 @@
-export const carousel = (items) =>
+import axios from 'axios';
+import { showAlert } from './alerts';
+
+export const carousel = (items, minPerSlide = 2) =>
   items.forEach((el) => {
-    const minPerSlide = 2;
     let next = el.nextElementSibling;
     for (let i = 1; i < minPerSlide; i++) {
       if (!next) {

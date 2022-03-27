@@ -90,6 +90,18 @@ const productSchema = new mongoose.Schema(
       type: String,
       required: [true, 'Product should have a size'],
     },
+    category: {
+      type: String,
+      default: 'Terazi',
+    },
+    brand: {
+      type: String,
+      default: 'Theferruat',
+    },
+    stock: {
+      type: Number,
+      default: 100,
+    },
   },
 
   {
