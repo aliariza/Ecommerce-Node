@@ -4,8 +4,7 @@ import { login, logout, signup } from './login';
 // import { bookTour } from './stripe';
 import { showAlert } from './alerts';
 import { carousel } from './carousel';
-import { countDocuments } from '../../models/productModel';
-import { makeArray } from 'jquery';
+// import { getProductView } from './productView';
 
 // DOM ELEMENTS
 // const mapBox = document.getElementById('map');
@@ -88,10 +87,13 @@ if (alertMessage) showAlert('success', alertMessage, 20);
 
 if (items) carousel(items);
 
+const products = document.querySelectorAll('.productModal');
+
+import { showAlert } from './alerts';
 const mainpageProduct = new bootstrap.Modal(
   document.getElementById('mainpageProduct')
 );
-const products = document.querySelectorAll('.productModal');
+
 const productHeaders = document.querySelectorAll('.isim h2');
 const productPrices = document.querySelectorAll('.product-price');
 const productColors = document.querySelectorAll('.product-color');
@@ -109,8 +111,11 @@ const modalKategori = document.querySelector('.modal-kategori');
 const modalMarka = document.querySelector('.modal-marka');
 const modalStok = document.querySelector('.modal-stok');
 const modalImage = document.querySelector('.modal-image');
+const modalTutari = document.querySelector('.modal-total');
 
-console.log(productImages[0]);
+const modalQtyHTML = document.querySelector('.modal-qty');
+const buttonPlus = document.querySelector('.button-plus');
+const buttonMinus = document.querySelector('.button-minus');
 
 products.forEach(function (product, i) {
   product.addEventListener('click', function () {
@@ -125,7 +130,25 @@ products.forEach(function (product, i) {
 
     const attribute = productImages[i].getAttribute('src');
     modalImage.setAttribute('src', attribute);
-    console.log(modalImage);
+
+    let QTY = (modalQtyHTML.innerHTML = 1);
+    let totalPrice = modalPrice.innerHTML * QTY * 1;
+    modalTutari.innerHTML = totalPrice;
+    buttonPlus.addEventListener('click', () => {
+      QTY = QTY++ < 100 ? QTY : 100;
+      totalPrice = modalPrice.innerHTML * QTY;
+      modalTutari.innerHTML = totalPrice;
+      modalQtyHTML.innerHTML = QTY;
+    });
+    buttonMinus.addEventListener('click', () => {
+      QTY = QTY-- > 1 ? QTY : 1;
+      totalPrice = modalPrice.innerHTML * QTY;
+
+      modalTutari.innerHTML = totalPrice;
+
+      modalQtyHTML.innerHTML = QTY;
+    });
+    console.log(QTY);
     mainpageProduct.show();
   });
 });
