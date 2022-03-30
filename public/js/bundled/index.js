@@ -142,10 +142,10 @@
       this[globalName] = mainExports;
     }
   }
-})({"ee29h":[function(require,module,exports) {
+})({"2j7S9":[function(require,module,exports) {
 "use strict";
 var HMR_HOST = null;
-var HMR_PORT = 49704;
+var HMR_PORT = 1234;
 var HMR_SECURE = false;
 var HMR_ENV_HASH = "36e5d3c4c4dc8466";
 module.bundle.HMR_BUNDLE_ID = "582e0334b28ee180";
@@ -525,9 +525,8 @@ var _login = require("./login");
 // import { bookTour } from './stripe';
 var _alerts = require("./alerts");
 var _carousel = require("./carousel");
-// import { getProductView } from './productView';
+var _productView = require("./productView");
 // DOM ELEMENTS
-// const mapBox = document.getElementById('map');
 var loginForm = document.querySelector('.form--login');
 var logOutBtn = document.querySelector('.nav__el--logout');
 // const userDataForm = document.querySelector('.form-user-data');
@@ -536,9 +535,9 @@ var logOutBtn = document.querySelector('.nav__el--logout');
 var signupForm = document.querySelector('.form--signup');
 var loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
 var signupModal = new bootstrap.Modal(document.getElementById('signupModal'));
-// FIRST PAGE PRODUCT MODAL
 // CAROUSEL
 var items = document.querySelectorAll('.carousel .carousel-inner .carousel-item');
+if (items) _carousel.carousel(items);
 if (loginForm) loginForm.addEventListener('submit', function(e) {
     e.preventDefault();
     var email = document.getElementById('email').value;
@@ -587,64 +586,12 @@ if (logOutBtn) logOutBtn.addEventListener('click', _login.logout);
 //     const { tourId } = e.target.dataset;
 //     bookTour(tourId);
 //   });
+var products = document.querySelectorAll('.productModal');
+if (products) _productView.productView(products);
 var alertMessage = document.querySelector('body').dataset.alert;
 if (alertMessage) _alerts.showAlert('success', alertMessage, 20);
-if (items) _carousel.carousel(items);
-var products = document.querySelectorAll('.productModal');
-var mainpageProduct = new bootstrap.Modal(document.getElementById('mainpageProduct'));
-var productHeaders = document.querySelectorAll('.isim h2');
-var productPrices = document.querySelectorAll('.product-price');
-var productColors = document.querySelectorAll('.product-color');
-var productCodes = document.querySelectorAll('.product-code');
-var productKategoris = document.querySelectorAll('.product-kategori');
-var productMarkas = document.querySelectorAll('.product-marka');
-var productStoks = document.querySelectorAll('.product-stok');
-var productImages = document.querySelectorAll('.product-image');
-var modalTitle = document.querySelector('.modal-baslik');
-var modalPrice = document.querySelector('.modal-price');
-var modalColor = document.querySelector('.modal-color');
-var modalCode = document.querySelector('.modal-code');
-var modalKategori = document.querySelector('.modal-kategori');
-var modalMarka = document.querySelector('.modal-marka');
-var modalStok = document.querySelector('.modal-stok');
-var modalImage = document.querySelector('.modal-image');
-var modalTutari = document.querySelector('.modal-total');
-var modalQtyHTML = document.querySelector('.modal-qty');
-var buttonPlus = document.querySelector('.button-plus');
-var buttonMinus = document.querySelector('.button-minus');
-products.forEach(function(product, i) {
-    product.addEventListener('click', function() {
-        var productID = product.getAttribute('data-id');
-        modalTitle.innerHTML = productHeaders[i].innerHTML;
-        modalPrice.innerHTML = productPrices[i].innerHTML;
-        modalColor.innerHTML = productColors[i].innerHTML;
-        modalCode.innerHTML = productCodes[i].innerHTML;
-        modalKategori.innerHTML = productKategoris[i].innerHTML;
-        modalMarka.innerHTML = productMarkas[i].innerHTML;
-        modalStok.innerHTML = productStoks[i].innerHTML;
-        var attribute = productImages[i].getAttribute('src');
-        modalImage.setAttribute('src', attribute);
-        var QTY = modalQtyHTML.innerHTML = 1;
-        var totalPrice = modalPrice.innerHTML * QTY * 1;
-        modalTutari.innerHTML = totalPrice;
-        buttonPlus.addEventListener('click', function() {
-            QTY = QTY++ < 100 ? QTY : 100;
-            totalPrice = modalPrice.innerHTML * QTY;
-            modalTutari.innerHTML = totalPrice;
-            modalQtyHTML.innerHTML = QTY;
-        });
-        buttonMinus.addEventListener('click', function() {
-            QTY = QTY-- > 1 ? QTY : 1;
-            totalPrice = modalPrice.innerHTML * QTY;
-            modalTutari.innerHTML = totalPrice;
-            modalQtyHTML.innerHTML = QTY;
-        });
-        console.log(QTY);
-        mainpageProduct.show();
-    });
-});
 
-},{"@babel/polyfill":"eoBSx","./login":"dhSY6","./alerts":"2me8o","./carousel":"iILtV"}],"eoBSx":[function(require,module,exports) {
+},{"@babel/polyfill":"eoBSx","./login":"dhSY6","./alerts":"2me8o","./carousel":"iILtV","./productView":"aOzwB"}],"eoBSx":[function(require,module,exports) {
 "use strict";
 require("./noConflict");
 var _global = _interopRequireDefault(require("core-js/library/fn/global"));
@@ -11090,9 +11037,6 @@ parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "carousel", function() {
     return carousel;
 });
-var _axios = require("axios");
-var _axiosDefault = parcelHelpers.interopDefault(_axios);
-var _alerts = require("./alerts");
 var carousel = function(items) {
     var minPerSlide = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : 2;
     return items.forEach(function(el) {
@@ -11108,6 +11052,99 @@ var carousel = function(items) {
     });
 };
 
-},{"axios":"3QxSY","./alerts":"2me8o","@parcel/transformer-js/src/esmodule-helpers.js":"6hZMW"}]},["ee29h","dN1My"], "dN1My", "parcelRequire398c")
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"6hZMW"}],"aOzwB":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "productView", function() {
+    return productView;
+});
+var _write = require("./write");
+var productView = function(products) {
+    var productHeaders = document.querySelectorAll('.isim h2');
+    var productPrices = document.querySelectorAll('.product-price');
+    var productColors = document.querySelectorAll('.product-color');
+    var productCodes = document.querySelectorAll('.product-code');
+    var productKategoris = document.querySelectorAll('.product-kategori');
+    var productMarkas = document.querySelectorAll('.product-marka');
+    var productStoks = document.querySelectorAll('.product-stok');
+    var productImages = document.querySelectorAll('.product-image');
+    var modalTitle = document.querySelector('.modal-baslik');
+    var modalPrice = document.querySelector('.modal-price');
+    var modalColor = document.querySelector('.modal-color');
+    var modalCode = document.querySelector('.modal-code');
+    var modalKategori = document.querySelector('.modal-kategori');
+    var modalMarka = document.querySelector('.modal-marka');
+    var modalStok = document.querySelector('.modal-stok');
+    var modalImage = document.querySelector('.modal-image');
+    var modalTutari = document.querySelector('.modal-total');
+    var modalQty = document.querySelector('.modal-qty');
+    var buttonPlus = document.querySelector('.button-plus');
+    var buttonMinus = document.querySelector('.button-minus');
+    // const QTY = 1;
+    var calcVars = {
+        bp: buttonPlus,
+        bm: buttonMinus,
+        qty: modalQty,
+        tprice: modalTutari,
+        uprice: modalPrice,
+        QTY: 1
+    };
+    var mainpageProduct = new bootstrap.Modal(document.getElementById('mainpageProduct'));
+    _write.plus(calcVars);
+    _write.minus(calcVars);
+    products.forEach(function(product, i) {
+        product.addEventListener('click', function() {
+            var productID = product.getAttribute('data-id');
+            modalTitle.innerHTML = productHeaders[i].innerHTML;
+            modalPrice.innerHTML = productPrices[i].innerHTML;
+            modalColor.innerHTML = productColors[i].innerHTML;
+            modalCode.innerHTML = productCodes[i].innerHTML;
+            modalKategori.innerHTML = productKategoris[i].innerHTML;
+            modalMarka.innerHTML = productMarkas[i].innerHTML;
+            modalStok.innerHTML = productStoks[i].innerHTML;
+            var attribute = productImages[i].getAttribute('src');
+            modalImage.setAttribute('src', attribute);
+            calcVars.QTY = 1;
+            _write.write(calcVars);
+            mainpageProduct.show();
+        });
+    });
+};
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"6hZMW","./write":"aMv5c"}],"aMv5c":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "write", function() {
+    return write;
+});
+parcelHelpers.export(exports, "plus", function() {
+    return plus;
+});
+parcelHelpers.export(exports, "minus", function() {
+    return minus;
+});
+var write = function(calcVars) {
+    var qty = calcVars.qty, tprice = calcVars.tprice, uprice = calcVars.uprice, QTY = calcVars.QTY;
+    qty.innerHTML = QTY;
+    tprice.innerHTML = QTY * uprice.innerHTML;
+};
+var plus = function(calcVars) {
+    var bp = calcVars.bp, QTY = calcVars.QTY;
+    bp.addEventListener('click', function() {
+        QTY = calcVars.QTY++ >= 100 ? 100 : calcVars.QTY;
+        calcVars.QTY = QTY;
+        write(calcVars);
+    });
+};
+var minus = function(calcVars) {
+    var bm = calcVars.bm, QTY = calcVars.QTY;
+    bm.addEventListener('click', function() {
+        QTY = calcVars.QTY-- <= 1 ? 1 : calcVars.QTY;
+        calcVars.QTY = QTY;
+        write(calcVars);
+    });
+};
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"6hZMW"}]},["2j7S9","dN1My"], "dN1My", "parcelRequire398c")
 
 //# sourceMappingURL=index.js.map

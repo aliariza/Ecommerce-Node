@@ -1,0 +1,69 @@
+extends base
+
+block content
+  .container
+    .d-none.d-md-block
+      div
+        ol.breadcrumb.bg-transparent.mt-5
+          li.breadcrumb-item
+            a(href="https://www.theferruat.com")
+              | 
+              | Ana Sayfa
+          li.breadcrumb-item
+            a(href="https://www.theferruat.com/category/product/2/urunler")
+              | ÜRÜNLER
+          li.breadcrumb-item
+            a(href="https://www.theferruat.com/subcategory/details/16/el-degirmeni", style="color:#222222; text-transform: uppercase;")=product.category
+          li.breadcrumb-item.active(style="color:#222222; text-transform: uppercase;")=product.name
+    .product-detail-wrapper
+      .product-info
+        .row
+          .col-sm-7.mb-5
+            .detail-image-wrapper.mb-5
+              #detail-image.detail-image
+
+          .offset-md-1.col-sm-4
+            .product-info-holder
+              div
+                // // GO TO SCRIPTS
+                .product-name
+                  input(type="hidden", id="product_id", value="15", min="1")
+                  h2#pname.m-0=product.name
+                  p.mt-0.mb-4
+                    span=product.color
+                  p.mt-0.mb-4
+                    span#size
+                  .d-flex
+                    h5(style="font-weight: normal;")
+                      span=`${product.price} ₺`
+                  p(style="font-size: 0.8rem;")
+                .product-attributes
+                  .row
+                    .col-12
+                      .row.my-5
+                        .col-3.align-self-center
+                          label.m-0(for="quantity", style="line-height:3rem;") ADET 
+                        .col-9.text-right
+                          button.border.border-dark(type="submit", style="height:2rem; width:2rem;font-weight: 800;font-size:1rem;color:#222;", onclick="cartDecrementProduct()") -
+                          input#pqty.text-center.border-0(type="text", name="quantity", value="1", min="1", max="940", disabled, style="height:2rem; width:4rem;")
+                          button.border.border-dark(type="button", style="height:2rem; width:2rem; font-weight: 800;font-size:1rem;color:#222;", onclick="cartIncrementProduct()") +
+                    .col-12
+                      .row.align-items-center.my-5.border-top.border-dark
+                        .col-3.pt-5
+                          label.m-0 FİYAT
+                        .col-9.text-right.pt-5
+                          h2.m-0
+                            span=`${product.price * 3}  ₺`
+                    button.btn-primary.btn.mx-auto(type="submit", style="max-width: 95%;", onclick="addToCart()") SEPETE EKLE
+              p.py-5(style="color: #E97E39;text-align: center;font-weight: bold;") Kargo tarihi siparişten sonra en geç 1 hafta.
+    .row
+      .col-sm-12
+        .product-description.mb-5
+          .product-description-header
+            h3 ÜRÜN AÇIKLAMASI
+            hr
+          .product-description-text(style="color:#666666")
+            p(style="text-align:justify")
+              span(style="font-size:18px")
+                span(style="color:#666666")=product.summary
+

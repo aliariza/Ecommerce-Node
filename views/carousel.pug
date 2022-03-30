@@ -20,14 +20,14 @@
                       p.product-stok(hidden)=product.stock
                   .col-md-7
                     .card-img
-                      img.img-fluid.product-image(src=`./img/${product.imageCover}`)
+                      img.img-fluid.product-image(src=`./img/product/${product.imageCover}`)
               .d-flex.justify-content-around.border-0.bg-transparent
+                a.btn.btn-primary.rounded-circle(href=`./product/${product.slug}`)
+                  img(src="../img/svg/eye.svg", height='35')
                 a.btn.btn-primary.rounded-circle(href="#")
-                  img(src="/img/svg/eye.svg", height='35')
-                a.btn.btn-primary.rounded-circle(href="#")
-                  img(src="/img/svg/heart.svg", height='35')
+                  img(src="../img/svg/heart.svg", height='35')
                 a.productModal.btn.btn-primary.rounded-circle
-                  img(src="/img/svg/shopping-cart.svg", height='35')
+                  img(src="../img/svg/shopping-cart.svg", height='35')
 a.carousel-control-prev.w-aut(href="#recipeCarousel", role="button", data-bs-slide="prev")
   span.carousel-control-prev-icon(aria-hidden="true", style="color:black!important")
 a.carousel-control-next.w-aut(href="#recipeCarousel", role="button", data-bs-slide="next")

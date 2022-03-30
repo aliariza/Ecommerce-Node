@@ -26,17 +26,16 @@ exports.getOverview = catchAsync(async (req, res, next) => {
 
 exports.getProduct = catchAsync(async (req, res, next) => {
   // 1) Get the data, for the requested tour (including reviews and guides)
-  console.log(req);
   const product = await Product.findOne({ slug: req.params.slug });
 
   if (!product) {
     return next(new AppError('There is no product with that name.', 404));
   }
-  console.log(product.name, product.price, product.id);
+  console.log(product);
 
   // 2) Build template
   // 3) Render template using data from 1)
-  res.status(200).render('modals/mainpageProduct', {
+  res.status(200).render('singleProduct', {
     title: `${product.name}`,
     product,
   });

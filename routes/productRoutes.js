@@ -1,6 +1,7 @@
 const express = require('express');
 const productController = require('../controllers/productController');
 const authController = require('../controllers/authController');
+const viewsController = require('../controllers/viewsController');
 // const reviewRouter = require('../routes/reviewRoutes');
 
 const router = express.Router();
@@ -59,5 +60,6 @@ router
     authController.restrictTo('admin'),
     productController.deleteProduct
   );
+router.route('/:slug').get(viewsController.getProduct);
 
 module.exports = router;
