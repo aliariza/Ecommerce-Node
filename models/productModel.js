@@ -173,6 +173,6 @@ productSchema.pre(/^find/, function (next) {
 //   next();
 // });
 
-const Product = mongoose.model('product', productSchema);
+const Product = mongoose.model('Product', productSchema);
 
 module.exports = Product;
