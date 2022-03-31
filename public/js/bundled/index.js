@@ -11058,8 +11058,9 @@ parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "productView", function() {
     return productView;
 });
-var _write = require("./write");
+var CalcProduct = require('../../utils/calcProduct');
 var productView = function(products) {
+    // DOM ELEMENTS RELATED TO CAROUSEL
     var productHeaders = document.querySelectorAll('.isim h2');
     var productPrices = document.querySelectorAll('.product-price');
     var productColors = document.querySelectorAll('.product-color');
@@ -11068,6 +11069,7 @@ var productView = function(products) {
     var productMarkas = document.querySelectorAll('.product-marka');
     var productStoks = document.querySelectorAll('.product-stok');
     var productImages = document.querySelectorAll('.product-image');
+    // DOM ELEMENTS RELATED TO Product Modal
     var modalTitle = document.querySelector('.modal-baslik');
     var modalPrice = document.querySelector('.modal-price');
     var modalColor = document.querySelector('.modal-color');
@@ -11080,18 +11082,8 @@ var productView = function(products) {
     var modalQty = document.querySelector('.modal-qty');
     var buttonPlus = document.querySelector('.button-plus');
     var buttonMinus = document.querySelector('.button-minus');
-    // const QTY = 1;
-    var calcVars = {
-        bp: buttonPlus,
-        bm: buttonMinus,
-        qty: modalQty,
-        tprice: modalTutari,
-        uprice: modalPrice,
-        QTY: 1
-    };
+    var productViewModal = new CalcProduct(modalQty, buttonMinus, buttonPlus, modalPrice, modalTutari);
     var mainpageProduct = new bootstrap.Modal(document.getElementById('mainpageProduct'));
-    _write.plus(calcVars);
-    _write.minus(calcVars);
     products.forEach(function(product, i) {
         product.addEventListener('click', function() {
             var productID = product.getAttribute('data-id');
@@ -11104,47 +11096,70 @@ var productView = function(products) {
             modalStok.innerHTML = productStoks[i].innerHTML;
             var attribute = productImages[i].getAttribute('src');
             modalImage.setAttribute('src', attribute);
-            calcVars.QTY = 1;
-            _write.write(calcVars);
+            productViewModal.reset();
             mainpageProduct.show();
         });
     });
+    productViewModal.add();
+    productViewModal.subtract();
 };
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"6hZMW","./write":"aMv5c"}],"aMv5c":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "write", function() {
-    return write;
-});
-parcelHelpers.export(exports, "plus", function() {
-    return plus;
-});
-parcelHelpers.export(exports, "minus", function() {
-    return minus;
-});
-var write = function(calcVars) {
-    var qty = calcVars.qty, tprice = calcVars.tprice, uprice = calcVars.uprice, QTY = calcVars.QTY;
-    qty.innerHTML = QTY;
-    tprice.innerHTML = QTY * uprice.innerHTML;
-};
-var plus = function(calcVars) {
-    var bp = calcVars.bp, QTY = calcVars.QTY;
-    bp.addEventListener('click', function() {
-        QTY = calcVars.QTY++ >= 100 ? 100 : calcVars.QTY;
-        calcVars.QTY = QTY;
-        write(calcVars);
-    });
-};
-var minus = function(calcVars) {
-    var bm = calcVars.bm, QTY = calcVars.QTY;
-    bm.addEventListener('click', function() {
-        QTY = calcVars.QTY-- <= 1 ? 1 : calcVars.QTY;
-        calcVars.QTY = QTY;
-        write(calcVars);
-    });
-};
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"6hZMW","../../utils/calcProduct":"3Slxy"}],"3Slxy":[function(require,module,exports) {
+var _helpers = require("@swc/helpers");
+var CalcProduct = /*#__PURE__*/ function() {
+    "use strict";
+    function CalcProduct(qty, bm, bp, modalPrice, modalTutari) {
+        _helpers.classCallCheck(this, CalcProduct);
+        this.qty = qty;
+        this.bm = bm;
+        this.bp = bp;
+        this.modalPrice = modalPrice;
+        this.modalTutari = modalTutari;
+    }
+    _helpers.createClass(CalcProduct, [
+        {
+            key: "add",
+            value: function add() {
+                var _this = this;
+                this.bp.addEventListener('click', function() {
+                    var QTY = _this.qty.innerHTML * 1;
+                    // eslint-disable-next-line no-plusplus
+                    QTY = QTY++ >= 100 ? 100 : QTY;
+                    _this.subTotal(QTY);
+                });
+            }
+        },
+        {
+            key: "subtract",
+            value: function subtract() {
+                var _this = this;
+                this.bm.addEventListener('click', function() {
+                    var QTY = _this.qty.innerHTML * 1;
+                    // eslint-disable-next-line no-plusplus
+                    QTY = QTY-- <= 1 ? 1 : QTY;
+                    _this.subTotal(QTY);
+                });
+            }
+        },
+        {
+            key: "subTotal",
+            value: function subTotal(QTY) {
+                this.qty.innerHTML = QTY;
+                this.modalTutari.innerHTML = this.modalPrice.innerHTML * QTY * 1;
+            }
+        },
+        {
+            key: "reset",
+            value: function reset() {
+                this.modalTutari.innerHTML = this.modalPrice.innerHTML * 1;
+                this.qty.innerHTML = 1;
+            }
+        }
+    ]);
+    return CalcProduct;
+}();
+module.exports = CalcProduct;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"6hZMW"}]},["2j7S9","dN1My"], "dN1My", "parcelRequire398c")
+},{"@swc/helpers":"aR2Ul"}]},["2j7S9","dN1My"], "dN1My", "parcelRequire398c")
 
 //# sourceMappingURL=index.js.map

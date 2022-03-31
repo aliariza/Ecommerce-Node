@@ -1,6 +1,7 @@
-import { write, plus, minus } from './write';
+const CalcProduct = require('../../utils/calcProduct');
 
 export const productView = (products) => {
+  // DOM ELEMENTS RELATED TO CAROUSEL
   const productHeaders = document.querySelectorAll('.isim h2');
   const productPrices = document.querySelectorAll('.product-price');
   const productColors = document.querySelectorAll('.product-color');
@@ -10,6 +11,7 @@ export const productView = (products) => {
   const productStoks = document.querySelectorAll('.product-stok');
   const productImages = document.querySelectorAll('.product-image');
 
+  // DOM ELEMENTS RELATED TO Product Modal
   const modalTitle = document.querySelector('.modal-baslik');
   const modalPrice = document.querySelector('.modal-price');
   const modalColor = document.querySelector('.modal-color');
@@ -23,21 +25,18 @@ export const productView = (products) => {
 
   const buttonPlus = document.querySelector('.button-plus');
   const buttonMinus = document.querySelector('.button-minus');
-  // const QTY = 1;
-  const calcVars = {
-    bp: buttonPlus,
-    bm: buttonMinus,
-    qty: modalQty,
-    tprice: modalTutari,
-    uprice: modalPrice,
-    QTY: 1,
-  };
+
+  const productViewModal = new CalcProduct(
+    modalQty,
+    buttonMinus,
+    buttonPlus,
+    modalPrice,
+    modalTutari
+  );
 
   const mainpageProduct = new bootstrap.Modal(
     document.getElementById('mainpageProduct')
   );
-  plus(calcVars);
-  minus(calcVars);
 
   products.forEach((product, i) => {
     product.addEventListener('click', function () {
@@ -52,9 +51,12 @@ export const productView = (products) => {
 
       const attribute = productImages[i].getAttribute('src');
       modalImage.setAttribute('src', attribute);
-      calcVars.QTY = 1;
-      write(calcVars);
+
+      productViewModal.reset();
+
       mainpageProduct.show();
     });
   });
+  productViewModal.add();
+  productViewModal.subtract();
 };
