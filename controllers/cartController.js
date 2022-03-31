@@ -20,12 +20,11 @@ exports.addItemToCart = async (req, res) => {
 
   try {
     let carth = await cart();
-    console.log(carth);
     const productDetails = await Product.findById(productId);
     if (!productDetails) {
       return res.status(500).json({
-        type: 'Not Found',
-        msg: 'Invalid request',
+        type: 'Bulunamadı',
+        msg: 'Geçersiz istek',
       });
     }
     //--If Cart Exists ----
@@ -101,7 +100,7 @@ exports.addItemToCart = async (req, res) => {
       res.json(carth);
     }
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     res.status(400).json({
       type: 'Invalid',
       msg: 'Something Went Wrong',
@@ -124,7 +123,7 @@ exports.getCart = async (req, res) => {
       data: carth,
     });
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     res.status(400).json({
       type: 'Invalid',
       msg: 'Something Went Wrong',
@@ -145,7 +144,7 @@ exports.emptyCart = async (req, res) => {
       data: data,
     });
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     res.status(400).json({
       type: 'Invalid',
       msg: 'Something Went Wrong',
