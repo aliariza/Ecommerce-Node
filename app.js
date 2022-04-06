@@ -1,5 +1,8 @@
 const path = require('path');
 const express = require('express');
+const session = require('express-session');
+const MongoDBStore = require('connect-mongodb-session')(session);
+
 const morgan = require('morgan');
 const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
@@ -12,13 +15,17 @@ const cors = require('cors');
 
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
-const productRouter = require('./routes/productRoutes');
-const userRouter = require('./routes/userRoutes');
-const cartRouter = require('./routes/cartRoutes');
-// const bookingRouter = require('./routes/bookingRoutes');
-// const bookingController = require('./controllers/bookingController');
+const Security = require('./utils/security');
 
 const viewRouter = require('./routes/viewRoutes');
+const productRouter = require('./routes/productRoutes');
+const cartRouter = require('./routes/cartRoutes');
+const userRouter = require('./routes/userRoutes');
+
+const security = new Security();
+
+// const bookingRouter = require('./routes/bookingRoutes');
+// const bookingController = require('./controllers/bookingController');
 
 // Start express app
 const app = express();
@@ -50,6 +57,14 @@ app.use(helmet());
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
+const DB = process.env.DATABASE.replace(
+  '<PASSWORD>',
+  process.env.DATABASE_PASSWORD
+);
+const store = new MongoDBStore({
+  uri: DB,
+  collection: DB.sessions,
+});
 
 // Limit requests from same API
 const limiter = rateLimit({
@@ -71,6 +86,17 @@ app.use(express.json({ limit: '10kb' }));
 app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 app.use(cookieParser());
 
+app.use(
+  session({
+    secret: 'This is a secret',
+    store: store,
+    resave: false,
+    saveUninitialized: true,
+    unset: 'destroy',
+    name: `Theferruat-${security.generateId()}`,
+    genid: (req) => security.generateId(),
+  })
+);
 // Data sanitization against NoSQL query injection
 app.use(mongoSanitize());
 
@@ -97,7 +123,7 @@ app.use((req, res, next) => {
 app.use('/', viewRouter);
 app.use('/api/v1/products', productRouter);
 app.use('/api/v1/users', userRouter);
-app.use('/api/v1/carts', cartRouter);
+app.use('/cart', cartRouter);
 // app.use('/api/v1/bookings', bookingRouter);
 
 app.all('*', (req, res, next) => {
