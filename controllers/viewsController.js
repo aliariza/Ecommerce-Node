@@ -3,9 +3,16 @@ const Product = require('../models/productModel');
 // // const Booking = require('../models/bookingModel');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
+const Cart = require('../utils/cart');
+const Security = require('../utils/security');
+
+const CartM = new Cart();
+
+const security = new Security();
 
 exports.alerts = (req, res, next) => {
   const { alert } = req.query;
+  console.log(alert);
   if (alert === 'booking')
     res.locals.alert =
       "Your booking was successful! Please check your email for a confirmation. If your booking doesn't show up here immediately, please come back later.";
@@ -13,14 +20,22 @@ exports.alerts = (req, res, next) => {
 };
 
 exports.getOverview = catchAsync(async (req, res, next) => {
+  if (!req.session.cart) {
+    req.session.cart = {
+      items: [],
+      totals: 0.0,
+      formattedTotals: '',
+    };
+  }
   // 1) Get tour data from collection
-  const products = await Product.find();
+  const products = await Product.find({ price: { $gt: 0 } });
 
   // 2) Build template
   // 3) Render that template using tour data from 1)
   res.status(200).render('overview', {
     title: 'All Products',
     products,
+    nonce: security.md5(req.sessionID + req.headers['user-agent']),
   });
 });
 
@@ -51,6 +66,35 @@ exports.getSignupForm = (req, res) => {
   res.status(200).render('modals/signup', {
     title: 'Kayıt',
   });
+};
+
+exports.getCart = catchAsync(async (req, res, next) => {
+  const sess = req.session;
+  const cart = typeof sess.cart !== 'undefined' ? sess.cart : false;
+  res.render('cart', {
+    pageTitle: 'Cart',
+    cart: cart,
+    nonce: security.md5(req.sessionID + req.headers['user-agent']),
+  });
+});
+
+exports.addToCart = (req, res) => {
+  console.log(req.body);
+  const qty = parseInt(req.body.qty, 10);
+  const product = parseInt(req.body.product_id, 10);
+  if (qty > 0 && security.isValidNonce(req.body.nonce, req)) {
+    Product.findOne({ product_id: product })
+      .then((prod) => {
+        const cart = req.session.cart ? req.session.cart : null;
+        CartM.addToCart(prod, qty, cart);
+        res.redirect('/cart');
+      })
+      .catch(() => {
+        res.redirect('/');
+      });
+  } else {
+    res.redirect('/');
+  }
 };
 
 // exports.getAccount = (req, res) => {

@@ -5,52 +5,52 @@
         h5#mainpageProductLabel.modal-title.modal-baslik
 
         button.btn-close(type="button", data-bs-dismiss="modal", aria-label="Close")
-      .modal-body
-        .row.justify-content-center.ms-auto
-          .col-md-4.border-end.text-center
-            img.img-fluid.modal-image(src="https://www.theferruat.com/upload/products/thumbnail/1712378209310789.png", alt="", width="350", height="auto")
-          .col-md-4.border-end
-            .d-flex.flex-column.h-100.justify-content-between
-              .row.justify-content-between
-                .col-md-6.text-start
-                  |Birim fiyat:
-                .col-md-6.text-end.modal-price
-              .row.justify-content-between 
-                .col-md-6.text-start
-                  |Urun Kodu:
-                .col-md-6.text-end.modal-code
-              .row.justify-content-between
-                .col-md-6.text-start
-                  |Kategori:
-                .col-md-6.text-end.modal-kategori
-              .row.justify-content-between 
-                .col-md-6.text-start
-                  |Marka:
-                .col-md-6.text-end.modal-marka
-              .row.justify-content-between
-                .col-md-6.text-start
-                  |Stok Durumu:
-                .col-md-6.text-end.modal-stok
+      form(action="/cart" method="post")  
+        .modal-body
+          .row.justify-content-center.ms-auto
+            .col-md-4.border-end.text-center
+              img.img-fluid.modal-image(src="https://www.theferruat.com/upload/products/thumbnail/1712378209310789.png", alt="", width="350", height="auto")
+            .col-md-4.border-end
+              .d-flex.flex-column.h-100.justify-content-between
+                .row.justify-content-between
+                  .col-md-6.text-start
+                    |Birim fiyat:
+                  .col-md-6.text-end.modal-price
+                .row.justify-content-between 
+                  .col-md-6.text-start
+                    |Urun Kodu:
+                  .col-md-6.text-end.modal-code
+                .row.justify-content-between
+                  .col-md-6.text-start
+                    |Kategori:
+                  .col-md-6.text-end.modal-kategori
+                .row.justify-content-between 
+                  .col-md-6.text-start
+                    |Marka:
+                  .col-md-6.text-end.modal-marka
+                .row.justify-content-between
+                  .col-md-6.text-start
+                    |Stok Durumu:
+                  .col-md-6.text-end.modal-stok
 
-          .col-md-4
-            .d-flex.flex-column.h-100.justify-content-around
-              .row.justify-content-between
-                .col-md-6.text-start
-                  |Renk:
-                .col-md-6.text-end.modal-color
-              .row.justify-content-between.border-bottom
-                .col-md-6.text-start(style="line-height:3rem;")
-                  |Adet
-                .col-md-6.d-inline-flex.justify-content-end
-                  button.button-minus(style="width:3rem;height:3rem") - 
-                  p.text-center.modal-qty(style="width:3rem;height:3rem;line-height:3rem") 1
-                  button.button-plus(style="width:3rem;height:3rem") +
+            .col-md-4
+              .d-flex.flex-column.h-100.justify-content-around
+                .row.justify-content-between
+                  .col-md-6.text-start
+                    |Renk:
+                  .col-md-6.text-end.modal-color
+                .row.justify-content-between.border-bottom
+                  .col-md-6.text-start(style="line-height:3rem;")
+                    |Adet
+                  .col-md-6.d-inline-flex.justify-content-end
+                    span.btn.button-minus(style="width:3rem;height:3rem") - 
+                    p.text-center.modal-qty(style="width:3rem;height:3rem;line-height:3rem") 1
+                    span.btn.button-plus(style="width:3rem;height:3rem") +
 
-              .row.justify-content-center
-                .col-md-6.text-start
-                  |Tutari:
-                .col-md-6.text-end.modal-total
-                  
+                .row.justify-content-center
+                  .col-md-6.text-start
+                    |Tutari:
+                  .col-md-6.text-end.modal-total
+                    
 
-      .modal-footer.justify-content-center
-        button.btn.btn-primary(type="button") Save changes
+          button.btn.btn-primary(type="submit") Save changes

@@ -19,7 +19,6 @@ const Security = require('./utils/security');
 
 const viewRouter = require('./routes/viewRoutes');
 const productRouter = require('./routes/productRoutes');
-const cartRouter = require('./routes/cartRoutes');
 const userRouter = require('./routes/userRoutes');
 
 const security = new Security();
@@ -123,7 +122,6 @@ app.use((req, res, next) => {
 app.use('/', viewRouter);
 app.use('/api/v1/products', productRouter);
 app.use('/api/v1/users', userRouter);
-app.use('/cart', cartRouter);
 // app.use('/api/v1/bookings', bookingRouter);
 
 app.all('*', (req, res, next) => {
