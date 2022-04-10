@@ -5,6 +5,7 @@ import { login, logout, signup } from './login';
 import { showAlert } from './alerts';
 import { carousel } from './carousel';
 import { productView } from './productView';
+// import { miniCartView } from './miniCartView';
 
 // DOM ELEMENTS
 const loginForm = document.querySelector('.form--login');
@@ -15,6 +16,11 @@ const logOutBtn = document.querySelector('.nav__el--logout');
 const signupForm = document.querySelector('.form--signup');
 const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
 const signupModal = new bootstrap.Modal(document.getElementById('signupModal'));
+const mainpageProduct = new bootstrap.Modal(
+  document.getElementById('mainpageProduct')
+);
+
+const miniCartForm = document.querySelector('.form--miniCart');
 
 // CAROUSEL
 const items = document.querySelectorAll(
@@ -43,8 +49,19 @@ if (signupForm)
 
 if (logOutBtn) logOutBtn.addEventListener('click', logout);
 
-const products = document.querySelectorAll('.productModal');
-if (products) productView(products);
+const products = document.querySelectorAll('.productModalBtn');
+const slugs = document.querySelectorAll('.product-slug');
+if (products)
+  products.forEach((product, i) => {
+    product.addEventListener('click', (e) => {
+      e.preventDefault();
+      const slug = slugs[i].innerHTML;
+      productView(slug);
+      mainpageProduct.toggle();
+    });
+  });
+// const productsMC = document.querySelector('.miniCartModal');
+// if (productsMC) miniCartView();
 
 const alertMessage = document.querySelector('body').dataset.alert;
 if (alertMessage) showAlert('success', alertMessage, 20);

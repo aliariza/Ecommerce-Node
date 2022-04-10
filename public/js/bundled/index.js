@@ -526,6 +526,7 @@ var _login = require("./login");
 var _alerts = require("./alerts");
 var _carousel = require("./carousel");
 var _productView = require("./productView");
+// import { miniCartView } from './miniCartView';
 // DOM ELEMENTS
 var loginForm = document.querySelector('.form--login');
 var logOutBtn = document.querySelector('.nav__el--logout');
@@ -535,6 +536,8 @@ var logOutBtn = document.querySelector('.nav__el--logout');
 var signupForm = document.querySelector('.form--signup');
 var loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
 var signupModal = new bootstrap.Modal(document.getElementById('signupModal'));
+var mainpageProduct = new bootstrap.Modal(document.getElementById('mainpageProduct'));
+var miniCartForm = document.querySelector('.form--miniCart');
 // CAROUSEL
 var items = document.querySelectorAll('.carousel .carousel-inner .carousel-item');
 if (items) _carousel.carousel(items);
@@ -555,8 +558,18 @@ if (signupForm) signupForm.addEventListener('submit', function(e) {
     signupModal.toggle();
 });
 if (logOutBtn) logOutBtn.addEventListener('click', _login.logout);
-var products = document.querySelectorAll('.productModal');
-if (products) _productView.productView(products);
+var products = document.querySelectorAll('.productModalBtn');
+var slugs = document.querySelectorAll('.product-slug');
+if (products) products.forEach(function(product, i) {
+    product.addEventListener('click', function(e) {
+        e.preventDefault();
+        var slug = slugs[i].innerHTML;
+        _productView.productView(slug);
+        mainpageProduct.toggle();
+    });
+});
+// const productsMC = document.querySelector('.miniCartModal');
+// if (productsMC) miniCartView();
 var alertMessage = document.querySelector('body').dataset.alert;
 if (alertMessage) _alerts.showAlert('success', alertMessage, 20);
 
@@ -11027,63 +11040,84 @@ parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "productView", function() {
     return productView;
 });
-var CalcProduct = require('../../utils/calcProduct');
-var productView = function(products) {
-    // DOM ELEMENTS RELATED TO CAROUSEL
-    var productHeaders = document.querySelectorAll('.isim h2');
-    var productPrices = document.querySelectorAll('.product-price');
-    var productColors = document.querySelectorAll('.product-color');
-    var productCodes = document.querySelectorAll('.product-code');
-    var productKategoris = document.querySelectorAll('.product-kategori');
-    var productMarkas = document.querySelectorAll('.product-marka');
-    var productStoks = document.querySelectorAll('.product-stok');
-    var productImages = document.querySelectorAll('.product-image');
-    // DOM ELEMENTS RELATED TO Product Modal
-    var modalTitle = document.querySelector('.modal-baslik');
+var _helpers = require("@swc/helpers");
+var _regeneratorRuntime = require("regenerator-runtime");
+var _regeneratorRuntimeDefault = parcelHelpers.interopDefault(_regeneratorRuntime);
+/* eslint-disable */ var _axios = require("axios");
+var _axiosDefault = parcelHelpers.interopDefault(_axios);
+var _alerts = require("./alerts");
+var CalcProduct = require('/utils/calcProduct');
+var catchAsync = require('/utils/catchAsync');
+var productView = catchAsync(_helpers.asyncToGenerator(_regeneratorRuntimeDefault.default.mark(function _callee(slug) {
+    var res;
+    return _regeneratorRuntimeDefault.default.wrap(function _callee$(_ctx) {
+        while(1)switch(_ctx.prev = _ctx.next){
+            case 0:
+                _ctx.prev = 0;
+                _ctx.next = 3;
+                return _axiosDefault.default({
+                    method: 'GET',
+                    url: '/api/v1/products',
+                    params: {
+                        slug: "".concat(slug)
+                    }
+                });
+            case 3:
+                res = _ctx.sent;
+                if (res.data.status === 'success') {
+                    showProductModal(res);
+                    calculate();
+                }
+                _ctx.next = 10;
+                break;
+            case 7:
+                _ctx.prev = 7;
+                _ctx.t0 = _ctx["catch"](0);
+                _alerts.showAlert('error', _ctx.t0);
+            case 10:
+            case "end":
+                return _ctx.stop();
+        }
+    }, _callee, null, [
+        [
+            0,
+            7
+        ]
+    ]);
+})));
+var showProductModal = function(res) {
+    document.getElementById('res').innerHTML = "\n  <div class=\"row justify-content-between\"> \n  <h5 id=\"mainpageProductLabel\">\n  ".concat(res.data.data.data[0].name, "\n</h5>\n<button\n  class=\"btn-close\"\n  type=\"button\"\n  data-bs-dismiss=\"modal\"\n  aria-label=\"Close\"\n></button>\n</div> \n<div class=\"modal-body\">\n  <div class=\"row justify-content-center ms-auto\">\n    <div class=\"col-md-4 border-end text-center\">\n      <img\n        class=\"img-fluid modal-image\"\n        src=\"./img/product/").concat(res.data.data.data[0].imageCover, "\"\n        alt=\"").concat(res.data.data.data[0].name, "\"\n        width=\"350\"\n        height=\"auto\"\n      />\n    </div>\n    <div class=\"col-md-4 border-end\">\n      <div class=\"d-flex flex-column h-100 justify-content-between\">\n        <div class=\"row justify-content-between\">\n          <div class=\"col-md-6 text-start\">Birim fiyat:</div>\n          <div class=\"col-md-6 text-end modal-price\">").concat(res.data.data.data[0].price, "</div>\n        </div>\n        <div class=\"row justify-content-between\">\n          <div class=\"col-md-6 text-start\">Urun Kodu:</div>\n          <div class=\"col-md-6 text-end modal-code\">\n            ").concat(res.data.data.data[0].code, "\n          </div>\n        </div>\n        <div class=\"row justify-content-between\">\n          <div class=\"col-md-6 text-start\">Kategori:</div>\n          <div class=\"col-md-6 text-end modal-kategori\">\n            ").concat(res.data.data.data[0].category, "\n          </div>\n        </div>\n        <div class=\"row justify-content-between\">\n          <div class=\"col-md-6 text-start\">Marka:</div>\n          <div class=\"col-md-6 text-end modal-marka\">\n            ").concat(res.data.data.data[0].brand, "\n          </div>\n        </div>\n        <div class=\"row justify-content-between\">\n          <div class=\"col-md-6 text-start\">Stok Durumu:</div>\n          <div class=\"col-md-6 text-end modal-stok\">\n            ").concat(res.data.data.data[0].stock, "\n          </div>\n        </div>\n      </div>\n    </div>\n    <div class=\"col-md-4\">\n      <div class=\"d-flex flex-column h-100 justify-content-around\">\n        <div class=\"row justify-content-between\">\n          <div class=\"col-md-6 text-start\">Renk:</div>\n          <div class=\"col-md-6 text-end modal-color\">\n            ").concat(res.data.data.data[0].color, "\n          </div>\n        </div>\n        <div class=\"row justify-content-between border-bottom\">\n          <div class=\"col-md-6 text-start\" style=\"line-height: 3rem\">Adet</div>\n          <div class=\"col-md-6 d-inline-flex justify-content-end\">\n            <span\n              class=\"btn button-minus\"\n              style=\"\n                width: 2.5rem;\n                height: 2.5rem;\n                border: 1px solid grey;\n                border-radius: 0;\n              \"\n            >\n              -\n            </span>\n            <p\n              class=\"text-center modal-qty\"\n              style=\"width: 3rem; height: 3rem; line-height: 3rem\"\n            >\n              1\n            </p>\n            <span\n              class=\"btn button-plus\"\n              style=\"\n                width: 2.5rem;\n                height: 2.5rem;\n                border: 1px solid grey;\n                border-radius: 0;\n              \"\n            >\n              +\n            </span>\n          </div>\n        </div>\n        <div class=\"row justify-content-center\">\n          <div class=\"col-md-6 text-start\">Tutari:</div>\n          <div class=\"col-md-6 text-end modal-total\"></div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n\n");
+};
+var calculate = function() {
     var modalPrice = document.querySelector('.modal-price');
-    var modalColor = document.querySelector('.modal-color');
-    var modalCode = document.querySelector('.modal-code');
-    var modalKategori = document.querySelector('.modal-kategori');
-    var modalMarka = document.querySelector('.modal-marka');
-    var modalStok = document.querySelector('.modal-stok');
-    var modalImage = document.querySelector('.modal-image');
-    var modalTutari = document.querySelector('.modal-total');
-    var modalQty = document.querySelector('.modal-qty');
     var buttonPlus = document.querySelector('.button-plus');
     var buttonMinus = document.querySelector('.button-minus');
-    var productViewModal = new CalcProduct(modalQty, buttonMinus, buttonPlus, modalPrice, modalTutari);
-    var mainpageProduct = new bootstrap.Modal(document.getElementById('mainpageProduct'));
-    products.forEach(function(product, i) {
-        product.addEventListener('click', function() {
-            var productID = product.getAttribute('data-id');
-            modalTitle.innerHTML = productHeaders[i].innerHTML;
-            modalPrice.innerHTML = productPrices[i].innerHTML;
-            modalColor.innerHTML = productColors[i].innerHTML;
-            modalCode.innerHTML = productCodes[i].innerHTML;
-            modalKategori.innerHTML = productKategoris[i].innerHTML;
-            modalMarka.innerHTML = productMarkas[i].innerHTML;
-            modalStok.innerHTML = productStoks[i].innerHTML;
-            var attribute = productImages[i].getAttribute('src');
-            modalImage.setAttribute('src', attribute);
-            productViewModal.reset();
-            mainpageProduct.show();
-        });
-    });
-    productViewModal.add();
-    productViewModal.subtract();
+    var modalQty = document.querySelector('.modal-qty');
+    var modalTutari = document.querySelector('.modal-total');
+    var calc = new CalcProduct(buttonMinus, buttonPlus, modalPrice, modalTutari, modalQty);
+    calc.reset();
+    calc.add();
+    calc.subtract();
 };
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"6hZMW","../../utils/calcProduct":"3Slxy"}],"3Slxy":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"6hZMW","@swc/helpers":"aR2Ul","regenerator-runtime":"lXRl0","./alerts":"2me8o","axios":"3QxSY","/utils/catchAsync":"eQgjU","/utils/calcProduct":"3Slxy"}],"eQgjU":[function(require,module,exports) {
+module.exports = function(fn) {
+    return function(req, res, next) {
+        fn(req, res, next).catch(next);
+    };
+};
+
+},{}],"3Slxy":[function(require,module,exports) {
 var _helpers = require("@swc/helpers");
 var CalcProduct = /*#__PURE__*/ function() {
     "use strict";
-    function CalcProduct(qty, bm, bp, modalPrice, modalTutari) {
+    function CalcProduct(bm, bp, modalPrice, modalTutari, qty) {
         _helpers.classCallCheck(this, CalcProduct);
-        this.qty = qty;
         this.bm = bm;
         this.bp = bp;
         this.modalPrice = modalPrice;
         this.modalTutari = modalTutari;
+        this.qty = qty;
     }
     _helpers.createClass(CalcProduct, [
         {
@@ -11094,6 +11128,7 @@ var CalcProduct = /*#__PURE__*/ function() {
                     var QTY = _this.qty.innerHTML * 1;
                     // eslint-disable-next-line no-plusplus
                     QTY = QTY++ >= 100 ? 100 : QTY;
+                    console.log(QTY);
                     _this.subTotal(QTY);
                 });
             }
@@ -11106,6 +11141,7 @@ var CalcProduct = /*#__PURE__*/ function() {
                     var QTY = _this.qty.innerHTML * 1;
                     // eslint-disable-next-line no-plusplus
                     QTY = QTY-- <= 1 ? 1 : QTY;
+                    console.log(QTY);
                     _this.subTotal(QTY);
                 });
             }
@@ -11113,6 +11149,7 @@ var CalcProduct = /*#__PURE__*/ function() {
         {
             key: "subTotal",
             value: function subTotal(QTY) {
+                console.log(this.modalPrice.innerHTML);
                 this.qty.innerHTML = QTY;
                 this.modalTutari.innerHTML = this.modalPrice.innerHTML * QTY * 1;
             }

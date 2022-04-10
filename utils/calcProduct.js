@@ -1,10 +1,10 @@
 class CalcProduct {
-  constructor(qty, bm, bp, modalPrice, modalTutari) {
-    this.qty = qty;
+  constructor(bm, bp, modalPrice, modalTutari, qty) {
     this.bm = bm;
     this.bp = bp;
     this.modalPrice = modalPrice;
     this.modalTutari = modalTutari;
+    this.qty = qty;
   }
 
   add() {
@@ -12,6 +12,8 @@ class CalcProduct {
       let QTY = this.qty.innerHTML * 1;
       // eslint-disable-next-line no-plusplus
       QTY = QTY++ >= 100 ? 100 : QTY;
+      console.log(QTY);
+
       this.subTotal(QTY);
     });
   }
@@ -21,12 +23,13 @@ class CalcProduct {
       let QTY = this.qty.innerHTML * 1;
       // eslint-disable-next-line no-plusplus
       QTY = QTY-- <= 1 ? 1 : QTY;
-
+      console.log(QTY);
       this.subTotal(QTY);
     });
   }
 
   subTotal(QTY) {
+    console.log(this.modalPrice.innerHTML);
     this.qty.innerHTML = QTY;
     this.modalTutari.innerHTML = this.modalPrice.innerHTML * QTY * 1;
   }

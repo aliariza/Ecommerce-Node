@@ -1,21 +1,29 @@
-#minicartModal.modal.modal-right.fade(tabindex="-1", aria-labelledby="minicartModalLabel",
+#miniCart.modal.modal-right.fade(tabindex="-1", aria-labelledby="minicartModalLabel",
 aria-hidden="true")
+  .mini-cart-product-id(hidden)
   .modal-dialog.modal-dialog-scrollable.modal-lg
     .modal-content
       .modal-header
-        h5#minicartModalModalLabel.modal-title Sepetim
+        h5#minicartModalLabel.modal-title Sepetim
         button.btn-close(type="button", data-bs-dismiss="modal", aria-label="Close")
       .modal-body
-        .container-fluid
-          .row
-            if user
-              .col-md-3(style="background-color:red")
-                img(src="https://www.theferruat.com/upload/products/thumbnail/1712378209310789.png", alt="", width="100%", height="auto")
-              .col-md-4.ms-auto(style="background-color:purple")
+        .form.form--miniCart
+          .container-fluid
+            .row
+              .col-md-3
+                img.img-fluid.cart-image(src="https://www.theferruat.com/upload/products/thumbnail/1712378209310789.png", alt="", width="100%", height="auto")
+              .col-md-4.ms-auto
                 .d-flex.flex-column
-                  .p-2 Flex item 1
-                  .p-2 Flex item 2
-                  .p-2 Flex item 3
-              .col-md-4.ms-auto(style="background-color:brown")
-            else 
-              | Henüz sepetinizde ürün yok!.
+                  .p-2.cart-baslik Kettle
+                  .p-2.cart-color Kirmizi
+                  .p-2.cart-price B.fiat: 100
+              .col-md-4.ms-auto
+                .d-flex.flex-column
+                  .p-2.mini-cart-product-qty
+                  .p-2.cart-total Tutari: 500
+          .row.justify-content-around.mt-5 
+            .col-md-6.text-center
+              button.btn.btn-primary(type='submit') Sepete git 
+            .col-md-6.text-center
+              button.btn.btn-primary(type='button') Alışverişe devam et
+

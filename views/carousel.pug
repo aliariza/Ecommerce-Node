@@ -13,11 +13,8 @@
                       h3.product-color=product.color
                     .card-description
                       p Lorem ipsum dolor sit, amet consectetur adipisicing elit. Praesentium, nisi? Dolorum assumenda laboriosam recusandae natus dolor. Exercitationem molestiae eaque soluta! Lorem ipsum dolor sit amet 
-                      p.product-price(hidden)=product.price
-                      p.product-code(hidden)=product.code
-                      p.product-kategori(hidden)=product.category
-                      p.product-marka(hidden)=product.brand
-                      p.product-stok(hidden)=product.stock
+                      
+                      p.product-slug(hidden)=product.slug
                   .col-md-7
                     .card-img
                       img.img-fluid.product-image(src=`./img/product/${product.imageCover}`)
@@ -26,7 +23,7 @@
                   img(src="../img/svg/eye.svg", height='35')
                 a.btn.btn-primary.rounded-circle(href="#")
                   img(src="../img/svg/heart.svg", height='35')
-                a.productModal.btn.btn-primary.rounded-circle
+                a#productModal.productModalBtn.btn.btn-primary.rounded-circle
                   img(src="../img/svg/shopping-cart.svg", height='35')
 a.carousel-control-prev.w-aut(href="#recipeCarousel", role="button", data-bs-slide="prev")
   span.carousel-control-prev-icon(aria-hidden="true", style="color:black!important")
